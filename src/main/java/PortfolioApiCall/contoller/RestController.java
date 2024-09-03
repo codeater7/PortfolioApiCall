@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,7 +24,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 
 @org.springframework.web.bind.annotation.RestController
-@RequestMapping("/api")
+@RequestMapping("/api/portfolio")
 @Configuration
 
 public class RestController {
@@ -68,8 +69,9 @@ public class RestController {
     }
 
 
-    @GetMapping("/portfolio")
-    public ResponseEntity<String> fetchPortfolioAndSaveToCsv(@RequestParam(value = "id") String id, @RequestParam(value = "startDate", required = false) String startDate, @RequestParam(value = "endDate", required = false) String endDate) {
+    @GetMapping("/{id}")
+    public ResponseEntity<String> fetchPortfolioAndSaveToCsv(@PathVariable(value = "id") String id, @RequestParam(value = "startDate", required = false) String startDate, @RequestParam(value = "endDate", required = false) String endDate) {
+
 
         HashMap<String, Object> params = paramsResolver(id, startDate, endDate);
 
@@ -90,8 +92,8 @@ public class RestController {
 
     }
 
-    @GetMapping("/portfolio/readonly")
-    public ResponseEntity<JsonNode> fetchPortfolio(@RequestParam(value = "id") String id, @RequestParam(value = "startDate", required = false) String startDate, @RequestParam(value = "endDate", required = false) String endDate) {
+    @GetMapping("/{id}/readonly")
+    public ResponseEntity<JsonNode> fetchPortfolio(@PathVariable(value = "id") String id, @RequestParam(value = "startDate", required = false) String startDate, @RequestParam(value = "endDate", required = false) String endDate) {
 
         HashMap<String, Object> params = paramsResolver(id, startDate, endDate);
 
@@ -109,8 +111,8 @@ public class RestController {
     }
 
 
-    @GetMapping("/download")
-    public ResponseEntity<Resource> downloadFile(@RequestParam(value = "id") String id, @RequestParam(value = "startDate", required = false) String startDate, @RequestParam(value = "endDate", required = false) String endDate) {
+    @GetMapping("/{id}/download")
+    public ResponseEntity<Resource> downloadFile(@PathVariable(value = "id") String id, @RequestParam(value = "startDate", required = false) String startDate, @RequestParam(value = "endDate", required = false) String endDate) {
 
         HashMap<String, Object> params = paramsResolver(id, startDate, endDate);
 

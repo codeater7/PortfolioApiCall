@@ -55,7 +55,7 @@ public class CsvWriterService {
         File file = filePath.toFile();
 
         csvMapper.writer(schema).writeValue(file, dataList);
-        logger.info("Successfully written data to file");
+        logger.info("Successfully written data to file with content " + dataList);
         return "Successfully written data to file";
     }
 
