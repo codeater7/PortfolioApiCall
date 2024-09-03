@@ -1,0 +1,28 @@
+scalar JSON
+
+type Query {
+    heartbeat: JSON
+    books : [Book]
+    bookById(id: Int): Book
+}
+
+type Book {
+    id: ID
+    name: String
+    pageCount: Int
+    author: Author
+}
+
+type Author {
+    id: ID
+    name: String
+}
+
+
+type Mutation {
+    addBook(name: String!, pageCount: Int!, authorId: Int!): Book
+}
+
+
+
+
